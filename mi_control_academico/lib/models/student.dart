@@ -40,5 +40,35 @@ class Student {
       currentClasses: newClasses,
     );
   }
+
+  // NUEVO: Método para calcular el promedio general de todas las clases
+  double calculateOverallAverage() {
+    double totalGradesSum = 0.0;
+    int totalValidGradesCount = 0;
+
+    for (var classInfo in currentClasses) {
+      for (var grade in classInfo.partialGrades) {
+        if (grade != null) {
+          totalGradesSum += grade;
+          totalValidGradesCount++;
+        }
+      }
+    }
+
+    if (totalValidGradesCount == 0) return 0.0;
+
+    return totalGradesSum / totalValidGradesCount;
+  }
+  
+  // NUEVO: Método para obtener el rango basado en el promedio
+  String getRango(double average) {
+    if (average >= 90.0) {
+      return 'Sobresaliente';
+    } else if (average >= 60.0) {
+      return 'Aprobado';
+    } else {
+      return 'Reprobado';
+    }
+  }
 }
 
